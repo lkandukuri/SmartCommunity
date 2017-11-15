@@ -1,0 +1,19 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+body {
+	background-image: url("/img/SC1.jpg");
+}
+
+a {
+  color: #00B7FF;
+}
+
+.container .jumbotron {
+	background-color: transparent;
+	color: white;
+}
+
+.login-page {
+	color: white;
+}

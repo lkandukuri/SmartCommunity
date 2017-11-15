@@ -1,0 +1,30 @@
+body {
+
+	background-image: url("/img/Grey.png");
+
+}
+
+.container {
+
+}
+
+.logout {
+	float: right;
+}
+
+.padding-sm-0 {
+	padding: 0px;
+}
+
+.form-group {
+	padding-top: 20px;
+	margin: 0px;
+}
+
+.post-form {
+	float: right;
+}
+
+.view-post-btn {
+	padding-top: 30px;
+}
