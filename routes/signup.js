@@ -1,25 +1,16 @@
 var ejs = require("ejs");
 var mysql = require('./mysql');
-var AWS = require('aws-sdk');
-var fs = require('fs');
-
-AWS.config.update({
-    accessKeyId: "xxxx",
-    secretAccessKey: "yyyy",
-    region:'xxxx',
-    sslEnabled: true,
-});
 
 function signup(req,res)
 {
     console.log("In signup Function");
     var out = [];
-    var getcommunities="select community from communities";
-
+    let getcommunities="select community from communities";
     mysql.fetchData(function (err,result) {
         if(err)
         {
             throw err;
+            /*console.log("error thrown");*/
         }
         else
         {
@@ -34,7 +25,7 @@ function signup(req,res)
 
             };
             console.log("---------SUCCESFULLY GOT FROM communities-------" + out[0]+out[1]);
-            ejs.renderFile('./views/signup.ejs',{out:out},function(err,result){
+            ejs.renderFile('./views/signup.ejs',{out:out,out1:out[0]},function(err,result){
                 // if it is success
                 if(!err)
                 {
@@ -62,11 +53,12 @@ function storeuserdetails(req,res)
     var community = req.body.community;
     var userObj = {
         username: username,
-        community: community
+        community: community,
+        email: email
     };
     var sess;
-    console.log("values of user are "+username+password+community+email);
-    var storeuser = "insert into users (username,email,password,community) values ('"+username+"','"+email+"','"+password+"','"+community+"' )";
+    console.log("values of user are "+username+password+email+community);
+    var storeuser = "insert into users (username,password,community,email) values ('"+username+"','"+password+"','"+community+"','"+email+"' )";
     mysql.fetchData(function (err,result) {
         if(err)
         {
@@ -78,7 +70,7 @@ function storeuserdetails(req,res)
             sess = req.session;
             sess.username=username;
             sess.community=community;
-            sess.email = email;
+            sess.email=email;
 
             var posts =[]
             console.log("---------------in stored userdetails -----");
@@ -108,63 +100,9 @@ function postadd(req,res)
     if(sess.username && sess.community){
         var title = req.body.Title;
         var description = req.body.Description;
-        var othercommunity = req.body.OtherCommunity;
-        var path = "xxxxxxxx/"+req.file.originalname;
-        console.log("session active "+sess.username+title+description+path+"Other Community:"+othercommunity+"end");
+        var path = "images/"+req.file.originalname;
+        console.log("session active "+sess.username+title+description+path);
         var access = true;
-
-        if(othercommunity){
-            var sns = new AWS.SNS();
-
-            var payload = title+" By: "+sess.username+" Please contact if interested: "+sess.email;
-
-
-            // first have to stringify the inner APNS object...
-           // payload.APNS = JSON.stringify(payload.APNS);
-            // then have to stringify the entire message payload
-             payload = JSON.stringify(payload);
-
-          /*  if(sess.community == 'ALAMEDA'){
-
-                arn = 'xxxx'
-
-            }
-            else{
-                arn = 'yyyy'
-            } */
-
-            console.log('sending push');
-            sns.publish({
-                Message: payload,
-                MessageStructure: 'string',
-                TargetArn: 'xxxxx'
-               }, function(err, data) {
-                if (err) {
-                    console.log(err.stack);
-                    return;
-                }
-
-                console.log('push sent');
-                console.log(data);
-                });
-
-        }
-
-        var fileStream = fs.createReadStream("./public/images/"+req.file.originalname);
-        var s3 = new AWS.S3();
-        s3.putObject({
-            Bucket:'xxxx',
-            Key: req.file.originalname,
-            Body: fileStream,
-            ContentType:'image/jpeg',
-            ACL: 'public-read',
-        }, function(err, data){
-            if(err){
-                console.log("------Image Upload error--------");
-                };
-            console.log('--- Image Uploaded -- ');
-
-        });
         var storepost = "insert into posts (username,imagepath,title,description,access,community) values ('"+sess.username+"','"+path+"','"+title+"','"+description+"','true','"+sess.community+"' )";
         mysql.fetchData(function (err,result) {
             if(err)

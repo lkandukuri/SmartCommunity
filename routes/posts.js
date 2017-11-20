@@ -22,7 +22,7 @@ function viewposts(req,res){
                     var post = {
                         title: result[i].title,
                         description: result[i].description,
-                        path: result[i].imagepath,
+                        path: "./" + result[i].imagepath,
                         username:result[i].username
 
                     }

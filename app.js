@@ -12,7 +12,8 @@ var users = require('./routes/users');
 var signup = require('./routes/signup');
 var login = require('./routes/login');
 var posts = require('./routes/posts');
-var email = require('./routes/email');
+var chat = require('./routes/chat');
+var community = require('./routes/community');
 var http = require('http')
 var bodyParser = require('body-parser');
 var session = require('express-session');
@@ -56,7 +57,6 @@ app.use('/', index);
 
 
 app.use('/users', users);
-
 app.get('/signup', signup.signup);
 app.post('/signup', signup.storeuserdetails);
 app.post('/postadd',upload.single('addImage'), signup.postadd);
@@ -64,8 +64,12 @@ app.get('/login', login.login);
 app.post('/login', login.postlogin);
 app.get('/logout', login.logout);
 app.post('/viewposts', posts.viewposts);
-app.post('/userchat',email.initiateemail);
+app.post('/userchat',chat.intiatechat);
 
+app.post('/createCommunity', community.createCommunity);
+app.post('/updateCommunity', community.updateCommunity);
+app.post('/deleteCommunity', community.deleteCommunity);
+app.post('/deleteUser', community.deleteUser);
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));

@@ -4,12 +4,12 @@ var mysql = require('mysql');
 
 function getConnection(){
     var connection = mysql.createConnection({
-
         host     : 'localhost',
         user     : 'root',
-        password : '123456',
+        password : 'Bliss@2020',
         database : 'my_schema',
-        port	 : 3306
+        port	 : 3306,
+        multipleStatements: true
     });
     return connection;
 }
