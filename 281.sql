@@ -22,7 +22,8 @@ CREATE TABLE `my_schema`.`users` (
     `community` VARCHAR(20) ,
 	PRIMARY KEY (`id`), 
     UNIQUE INDEX `id_UNIQUE` (`id` ASC), 
-    UNIQUE INDEX `username_UNIQUE` (`username` ASC) 
+    UNIQUE INDEX `username_UNIQUE` (`username` ASC) ,
+    `is_admin` TINYINT(1) DEFAULT 0 NOT NULL
 );
 
 
