@@ -2,6 +2,7 @@ var ejs = require("ejs");
 var mysql = require('./mysql');
 var AWS = require('aws-sdk');
 var fs = require('fs');
+var login =  require('./login');
 
 AWS.config.update({
     accessKeyId: "xxxx",
@@ -103,13 +104,13 @@ function postadd(req,res)
 {
     console.log("In postadd Function");
 
-
     var sess =  req.session;
     if(sess.username && sess.community){
         var title = req.body.Title;
+        var price = req.body.Price;
         var description = req.body.Description;
         var othercommunity = req.body.OtherCommunity;
-        var path = "xxxxxxxx/"+req.file.originalname;
+        var path = "images/"+req.file.originalname;
         console.log("session active "+sess.username+title+description+path+"Other Community:"+othercommunity+"end");
         var access = true;
 
@@ -117,21 +118,10 @@ function postadd(req,res)
             var sns = new AWS.SNS();
 
             var payload = title+" By: "+sess.username+" Please contact if interested: "+sess.email;
-
-
             // first have to stringify the inner APNS object...
            // payload.APNS = JSON.stringify(payload.APNS);
             // then have to stringify the entire message payload
              payload = JSON.stringify(payload);
-
-          /*  if(sess.community == 'ALAMEDA'){
-
-                arn = 'xxxx'
-
-            }
-            else{
-                arn = 'yyyy'
-            } */
 
             console.log('sending push');
             sns.publish({
@@ -165,7 +155,7 @@ function postadd(req,res)
             console.log('--- Image Uploaded -- ');
 
         });
-        var storepost = "insert into posts (username,imagepath,title,description,access,community) values ('"+sess.username+"','"+path+"','"+title+"','"+description+"','true','"+sess.community+"' )";
+        var storepost = "insert into posts (username,imagepath,title,description,access,community,price) values ('"+sess.username+"','"+path+"','"+title+"','"+description+"','true','"+sess.community+"','"+price+"' )";
         mysql.fetchData(function (err,result) {
             if(err)
             {
@@ -174,15 +164,47 @@ function postadd(req,res)
             }
             else
             {
-
                 console.log("---------------in stored post completed -----");
+                var userObj = global.userObj;
+                var getposts="select title,description,imagepath,price from posts where username ='"+userObj.username+"'";
+                var posts =[];
+                mysql.fetchData(function (err,result) {
+                    if(result.length> 0){
 
+                        console.log("---------------posts found -----");
+                        for (var i = 0; i < result.length; i++) {
+                            var post ={
+                                title:result[i].title,
+                                description: result[i].description,
+                                path: result[i].imagepath,
+                                price: result[i].price
+
+                            }
+                            console.log("---------------posts found -----"+post.title+post.description+post.path);
+                            posts.push(post);
+                        }
+
+                    }
+                    console.log("---------------posts query dones -----");
+                    ejs.renderFile('./views/profile.ejs',{user:userObj,posts:posts},function(err,result){
+                        // if it is success
+                        if(!err)
+                        {
+                            res.end(result);
+                        }
+                        //ERROR
+                        else
+                        {
+                            res.end("ERROR OCCURED ");
+                            console.log(err);
+                        }
+                    });
+
+                },getposts)
 
             }
         },storepost);
-
     }
-     res.end("Done!!");
 
 
 }

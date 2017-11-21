@@ -3,21 +3,60 @@ var mysql = require('./mysql');
 
 function login(req,res)
 {
-            ejs.renderFile('./views/login.ejs',function(err,result){
-                // if it is success
-                if(!err)
-                {
-                    res.end(result);
-                }
-                //ERROR
-                else
-                {
-                    res.end("ERROR OCCURED ");
-                    console.log(err);
-                }
-            });
-
+    ejs.renderFile('./views/login.ejs',function(err,result){
+        // if it is success
+        if(!err)
+        {
+            res.end(result);
+        }
+        //ERROR
+        else
+        {
+            res.end("ERROR OCCURED ");
+            console.log(err);
+        }
+    });
 }
+
+function renderHome(req,res){
+    var userObj = global.userObj;
+    var getposts="select title,description,imagepath,price from posts where username ='"+userObj.username+"'";
+    var posts =[];
+    mysql.fetchData(function (err,result) {
+        if(result.length> 0){
+
+            console.log("---------------posts found -----");
+            for (var i = 0; i < result.length; i++) {
+                var post ={
+                    title:result[i].title,
+                    description: result[i].description,
+                    path: result[i].imagepath,
+                    price:result[i].price
+
+                }
+                console.log("---------------posts found -----"+post.title+post.description+post.path);
+                posts.push(post);
+            }
+
+        }
+        console.log("---------------posts query dones -----");
+        ejs.renderFile('./views/profile.ejs',{user:userObj,posts:posts},function(err,result){
+            // if it is success
+            if(!err)
+            {
+                res.end(result);
+            }
+            //ERROR
+            else
+            {
+                res.end("ERROR OCCURED ");
+                console.log(err);
+            }
+        });
+
+    },getposts)
+}
+
 function postlogin(req,res){
     var username= req.body.username;
     var password= req.body.password;
@@ -44,7 +83,7 @@ function postlogin(req,res){
                     username: username,
                     community: result[0].community
                 };
-                var getposts="select title,description,imagepath from posts where username ='"+username+"'";
+                var getposts="select title,description,imagepath,price from posts where username ='"+username+"'";
                 var posts =[];
                 mysql.fetchData(function (err,result) {
                     if(result.length> 0){
@@ -54,8 +93,8 @@ function postlogin(req,res){
                             var post ={
                                 title:result[i].title,
                                 description: result[i].description,
-                                path: result[i].imagepath
-
+                                path: result[i].imagepath,
+                                price:result[i].price
                             }
                             console.log("---------------posts found -----"+post.title+post.description+post.path);
                             posts.push(post);
@@ -63,6 +102,8 @@ function postlogin(req,res){
 
                     }
                     console.log("---------------posts query dones -----");
+                    global.userObj= userObj;
+                    global.posts = posts;
                     ejs.renderFile('./views/profile.ejs',{user:userObj,posts:posts},function(err,result){
                         // if it is success
                         if(!err)
@@ -114,3 +155,4 @@ function logout (req,res) {
 exports.login=login;
 exports.postlogin = postlogin;
 exports.logout = logout;
+exports.renderHome = renderHome;

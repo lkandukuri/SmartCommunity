@@ -7,8 +7,8 @@ function getConnection(){
 
         host     : 'localhost',
         user     : 'root',
-        password : '123456',
-        database : 'my_schema',
+        password : 'root',
+        database : 'smartcommunity',
         port	 : 3306
     });
     return connection;

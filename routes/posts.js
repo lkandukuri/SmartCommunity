@@ -12,7 +12,7 @@ function viewposts(req,res){
             username: username,
             community: community
         };
-        var getposts = "select username,title,description,imagepath from posts where username !='" + username + "'"+"AND community="+"'"+community+"'";;
+        var getposts = "select username,title,description,imagepath,price from posts where username !='" + username + "'"+"AND community="+"'"+community+"'";;
         var posts = [];
         mysql.fetchData(function (err, result) {
             if (result.length > 0) {
@@ -23,7 +23,8 @@ function viewposts(req,res){
                         title: result[i].title,
                         description: result[i].description,
                         path: result[i].imagepath,
-                        username:result[i].username
+                        username:result[i].username,
+                        price:result[i].price
 
                     }
                     console.log("---------------posts found -----" + post.title + post.description+post.username + post.path);
