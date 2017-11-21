@@ -65,6 +65,7 @@ app.post('/login', login.postlogin);
 app.get('/logout', login.logout);
 app.post('/viewposts', posts.viewposts);
 app.post('/userchat',email.initiateemail);
+app.get('/home',login.renderHome);
 
 
 http.createServer(app).listen(app.get('port'), function(){
