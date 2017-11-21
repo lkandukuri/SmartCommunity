@@ -9,81 +9,133 @@
 </head>
 <body>
 <div class="container">
+	<div>
+		<nav class="navbar navbar-inverse" role="navigation" style="">
+			<div class="HomepageTitle">Welcome, <%= user.username %></div>
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="/home" class="HomepageHome">Home</a>
+				</li>
+				<li>
+					<form action="/viewposts" method="post">
+						<a href="javascript:;" class="HomepageMypost" onclick="parentNode.submit();">All Posts</a>
+						<input type="hidden" name="mess" value="My Post"/>
+					</form>
+				</li>
+				<li><a href="/logout" class="HomepageLogout">Logout</a></li>
+			</ul>
+		</nav>
+	</div>
 
 	<div class="page-header row">
 		<div class="row col-sm-12 text-center">
-			<h1><span class="fa"></span> Profile Page</h1>
+
 		</div>
-		<div class="row col-sm-6">
-			
-			<!-- LOCAL INFORMATION -->
-			<strong>username</strong>: <%= user.username %><br>
-			<strong>community</strong>: <%= user.community %><br>
-			<!-- <div class="well">
-				<h3><span class="fa fa-user"></span> Smart Community</h3>
-				<p>
-					<strong>username</strong>: <%= user.username %><br>
-					<strong>community</strong>: <%= user.community %><br>
-				</p>
-			</div> -->
+		<div class="row col-sm-6 Community">
+			<strong>Community</strong>: <%= user.community %><br>
 		</div>
-		
-		<a href="/logout" class="btn btn-default btn-sm logout">Logout</a>
 	</div>
 
 	<div class="row">
-		<div class="col-sm-6">
-			<form action="/postadd" method="post" enctype="multipart/form-data" class="col-sm-12 add-form">
-				<div class="form-group row">
-					<label class="col-sm-3">Title</label>
-					<input type="text" name="Title" class="col-sm-8" required></input>
-				</div>
-				<div class="form-group row">
-					<label class="col-sm-3">Description</label>
-					<textarea name="Description" cols="40" rows="5" class="col-sm-8" required></textarea>
-				</div>
-				<div class="form-group row">
-					<label class="col-sm-3">Check if you want to notify other Communities</label>
-					<input type="checkbox" name="OtherCommunity" value="OtherCommunity"> Other Community<br>
-				</div>
-				<div class="form-group row">
-					<input type='file' name='addImage' class="col-sm-8 col-sm-offset-3 padding-sm-0" required>	
-				</div>
-				<div class="form-group row">
-					<div class="col-sm-3 col-sm-offset-3 padding-sm-0">
-						<button type="submit" class="btn btn-warning btn-lg">Add Post</button>	
-					</div>
-				</div>
-			</form>
-			<div class="form-group row view-post-btn">
-				<div class="col-sm-3 col-sm-offset-3">
-					<form action="/viewposts" method="post" class="post-form">
-						<button type="submit" class="btn btn-warning btn-lg">View Posts</button>
-					</form>		
-				</div>		
-			</div>
-		</div>
-		
-		<!-- <hr> -->
-		<div class="col-sm-6">
+		<div class="col-sm-6 leftSection">
 			<div class="row">
 				<div class="col-sm-6">
-					<h2>My Recent Posts</h2>
+					<span class="CommTitle">My Recent Posts</span>
 				</div>
 			</div>
-			
+
 			<div class="row">
-				<% for(let i = 0; i < posts.length; i++) { %>
-				<article class="col-sm-12">
-					   <h3><%= posts[i].title %></h3>
-					   <p><%= posts[i].description %></p>
-					   <img style="border: 1px solid #000; max-width:300px; max-height:300px;" src='<%= posts[i].path %>'/>
-				</article>
-		        <% } %>	
+                <% for(let i = 0; i < posts.length; i++) { %>
+				<div class="postcontainer">
+					<article class="col-sm-12 ">
+						<span class="postImage">
+							<img style="" src='<%= posts[i].path %>'/>
+						</span>
+						<span class="postDescription">
+							<span class="productPostTitle"><%= posts[i].title %></span>
+							<span class="productPostDescription"><%= posts[i].description %></span>
+				    		<span class="productPostPrice"> $ <%= posts[i].price %></span>
+						</span>
+
+					</article>
+				</div>
+                <% } %>
 			</div>
-	        
+
 		</div>
+
+
+		<div class="col-sm-6 rightSection">
+			<div class="form-group row view-post-btn">
+				<div class="col-sm-3 col-sm-offset-3">
+					<button id="myBtn" class="btn btn-warning btn-lg">Add Post</button>
+				</div>
+			</div>
+
+			<!-- The Modal -->
+			<div id="myModal" class="modal">
+
+				<!-- Modal content -->
+				<div class="modal-content">
+					<span class="close">&times;</span>
+					<div class="addpostmodal">
+						<form action="/postadd" method="post" enctype="multipart/form-data" class="col-sm-12 add-form">
+							<div class="form-group row">
+								<label class="col-sm-3">Title</label>
+								<input type="text" name="Title" class="col-sm-8" required></input>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-3">Description</label>
+								<textarea name="Description" cols="40" rows="5" class="col-sm-8" required></textarea>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-3">Price</label>
+								<input name="Price"  class="col-sm-8" required></input>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-sm-3">Check if you want to notify other Communities</label>
+								<input type="checkbox" name="OtherCommunity" value="OtherCommunity"> Other Community<br>
+							</div>
+							<div class="form-group row">
+								<input type='file' name='addImage' class="col-sm-8 col-sm-offset-3 padding-sm-0" required>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-3 col-sm-offset-3 padding-sm-0">
+									<button type="submit" class="btn btn-warning btn-lg">Add</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- <hr> -->
+
 	</div>
+</div>
+
+<script>
+    var modal = document.getElementById('myModal');
+    var btn = document.getElementById("myBtn");
+    var span = document.getElementsByClassName("close")[0];
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+<div>
+	<nav class="navbar navbar-inverse" role="navigation" style="">
+		Footer
+	</nav>
 </div>
 </body>
 </html>
