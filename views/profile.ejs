@@ -18,7 +18,7 @@
 				</li>
 				<li>
 					<form action="/viewposts" method="post">
-						<a href="javascript:;" class="HomepageMypost" onclick="parentNode.submit();">All Posts</a>
+						<a href="javascript:;" class="HomepageMypost" onclick="parentNode.submit();">My Post</a>
 						<input type="hidden" name="mess" value="My Post"/>
 					</form>
 				</li>
@@ -29,9 +29,11 @@
 
 	<div class="page-header row">
 		<div class="row col-sm-12 text-center">
-
+			<!--h1><span class="fa"></span> Profile Page</h1-->
 		</div>
-		<div class="row col-sm-6 Community">
+		<div class="row col-sm-6">
+
+			<!-- LOCAL INFORMATION -->
 			<strong>Community</strong>: <%= user.community %><br>
 		</div>
 	</div>
@@ -40,7 +42,7 @@
 		<div class="col-sm-6 leftSection">
 			<div class="row">
 				<div class="col-sm-6">
-					<span class="CommTitle">My Recent Posts</span>
+					<h2>My Recent Posts</h2>
 				</div>
 			</div>
 
@@ -49,12 +51,11 @@
 				<div class="postcontainer">
 					<article class="col-sm-12 ">
 						<span class="postImage">
-							<img style="" src='<%= posts[i].path %>'/>
+							<img style="border: 1px solid #000; max-width:300px; max-height:300px;" src='<%= posts[i].path %>'/>
 						</span>
 						<span class="postDescription">
-							<span class="productPostTitle"><%= posts[i].title %></span>
-							<span class="productPostDescription"><%= posts[i].description %></span>
-				    		<span class="productPostPrice"> $ <%= posts[i].price %></span>
+							<h3><%= posts[i].title %></h3>
+							<p><%= posts[i].description %></p>
 						</span>
 
 					</article>
@@ -89,11 +90,6 @@
 								<textarea name="Description" cols="40" rows="5" class="col-sm-8" required></textarea>
 							</div>
 							<div class="form-group row">
-								<label class="col-sm-3">Price</label>
-								<input name="Price"  class="col-sm-8" required></input>
-							</div>
-
-							<div class="form-group row">
 								<label class="col-sm-3">Check if you want to notify other Communities</label>
 								<input type="checkbox" name="OtherCommunity" value="OtherCommunity"> Other Community<br>
 							</div>
@@ -107,6 +103,15 @@
 							</div>
 						</form>
 					</div>
+				</div>
+
+			</div>
+
+			<div class="form-group row view-post-btn">
+				<div class="col-sm-3 col-sm-offset-3">
+					<form action="/viewposts" method="post" class="post-form">
+						<button type="submit" class="btn btn-warning btn-lg">View Posts</button>
+					</form>
 				</div>
 			</div>
 		</div>

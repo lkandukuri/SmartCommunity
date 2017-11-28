@@ -21,7 +21,7 @@
                 <li><a href="/home" class="HomepageHome">Home</a></li>
                 <li>
                     <form action="/viewposts" method="post">
-                        <a href="javascript:;" class="HomepageMypost" onclick="parentNode.submit();">All Posts</a>
+                        <a href="javascript:;" class="HomepageMypost" onclick="parentNode.submit();">My Post</a>
                         <input type="hidden" name="mess" value="My Post"/>
                     </form>
                 </li>
@@ -35,15 +35,14 @@
     <span class="CommTitle">Community Posts</span>
     <% for(let i = 0; i < posts.length; i++) { %>
     <form action="/userchat" method="post">
-        <div class="allpostcontainer">
+        <div class="postcontainer">
             <article>
-                    <span class="allpostImage">
-						<img style="" src='<%= posts[i].path %>'/>
+                    <span class="postImage">
+						<img style="border: 1px solid #000; max-width:300px; max-height:300px;" src='<%= posts[i].path %>'/>
                     </span>
                 <span class="allpostDescription">
 				    	<span class="productTitle"><%= posts[i].title %></span>
 				    	<span class="productDescription"><%= posts[i].description %></span>
-				    	<span class="productPrice">$ <%= posts[i].price %></span>
                         <button id="contactOwner" type="submit" class="btn btn-warning btn-lg">Contact Owner</button>
 				    	<span class="productOwner">Owner: <%= posts[i].username %></span>
                     </span>
