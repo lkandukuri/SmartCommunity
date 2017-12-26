@@ -1,7 +1,5 @@
 body {
-
-	background-image: url("/img/Grey.png");
-
+	/*background-image: url("/img/Grey.png");*/
 }
 
 .container {
@@ -27,4 +25,248 @@ body {
 
 .view-post-btn {
 	padding-top: 30px;
+}
+
+.HomepageTitle {
+	font-size: 25px;
+	color: white;
+	margin: 20px 0px 20px 25px;
+	display: inline-block;
+	float: left;
+}
+.navbar{
+	height:70px;
+}
+
+.nav.navbar-nav{
+	font-size: 18px;
+}
+
+.navbar li {
+	font-weight: 700;
+	top: 14px;
+	left: 625px;
+	padding: 0 20px 0 0px;
+}
+
+.leftSection
+{
+	width:100%;
+	min-height: 530px;
+	margin-bottom: 20px;
+	margin-top: -20px;
+}
+
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+	background-color: #fefefe;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+}
+
+/* The Close Button */
+.close {
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+
+.rightSection
+{
+	width:0%;
+	min-height: 530px;
+}
+
+.addpostmodal {
+	margin-top: 30px;
+}
+
+.btn-warning {
+	color: #fff;
+	background-color: #ee4b28 !important;
+	border-color: #ee4b28 !important;
+	min-width: 125px;
+}
+
+button#myBtn {
+	margin-left: -43px;
+}
+
+.postcontainer {
+	border: 1px solid lightgrey;
+	margin: 25px 25px 10px 17px;
+	padding: 20px;
+	min-height: 250px;
+}
+
+.allpostcontainer {
+	min-height: 300px;
+	border: 1px solid lightgrey;
+	margin: 25px 25px 10px 17px;
+	padding: 20px;
+}
+
+.postDescription {
+	display: inline-block;
+	position: relative;
+	left: 25px;
+}
+
+
+.allpostDescription {
+	display: inline-block;
+	position: relative;
+	margin-left: 25px;
+	width: 67%;
+}
+
+.container {
+	min-height: 700px;
+}
+
+.productTitle , .productPostTitle{
+	font-size: 25px;
+	font-weight: 700;
+	font-family: "Open Sans","Helvetica Neue",Arial,sans-serif;
+	display: block;
+}
+
+.productDescription, .productPostDescription {
+	font-size: 20px;
+	color: #868e96;
+	font-family: Merriweather,"Helvetica Neue",Arial,sans-serif;
+	display: block;
+	/*width: 500px;
+	height: 200px;*/
+	/*position: absolute;*/
+}
+
+.productPostPrice {
+	font-size: 18px;
+	bottom: -110px;
+	position: inherit;
+	font-weight: 600;
+}
+
+.contact-options div {
+	margin-bottom: 10px;
+}
+
+.productOwner {
+	font-size: 18px;
+}
+.CommTitle{
+	font-family: "Open Sans","Helvetica Neue",Arial,sans-serif;
+	font-size: 25px;
+	color: #ee4b28 !important;
+	margin-left: 25px;
+}
+
+
+.AdminCommTitle{
+	font-family: "Open Sans","Helvetica Neue",Arial,sans-serif;
+	font-size: 25px;
+	color: #ee4b28 !important;
+	margin-left: 10px;
+}
+.allpostImage {
+	width: 30%;
+	height: 275px;
+	display: inline-block;
+	border-right: 1px solid lightgrey;
+	vertical-align: top;
+}
+
+.allpostImage img {
+	max-width: 300px;
+	max-height: 300px;
+}
+
+.postImage {
+	width: 305px;
+	height: 260px;
+	display: inline-block;
+	border-right: 1px solid lightgrey;
+	margin: -20px 0 -21px 0;
+}
+
+.postImage img {
+	max-width: 300px;
+	max-height: 300px;
+	left: -14px;
+	position: relative;
+	top: 20px;
+}
+
+.HomepageMypost {
+	color: #999;
+	text-decoration: none;
+	position: relative;
+	top: 13px;
+}
+
+.HomepageMypost:hover, .HomepageMypost:focus {
+	color: #fff;
+	background-color: transparent;
+	text-decoration: none;
+}
+
+.row.col-sm-6.Community {
+	font-size: 20px;
+	padding-left: 45px;
+	padding-bottom: 25px;
+}
+
+span.productPrice {
+	position: relative;
+	font-size: 18px;
+	font-weight: 600;
+	bottom: -115px;
+	left: -130px;
+}
+
+textarea.col-sm-8 {
+	width: 67%;
+}
+
+span.productCommunity {
+	position: relative;
+	top: 60px;
+}
+
+span.row.col-sm-8.Community {
+	margin-left: 25px;
+	font-size: 18px;
+}
+
+.view-post-btn {
+	padding-top: 0px !important;
+	position: relative;
+	right: -233px;
+	padding-bottom: 15px;
 }

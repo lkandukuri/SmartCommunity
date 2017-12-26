@@ -5,12 +5,14 @@ var mysql = require('mysql');
 function getConnection(){
     var connection = mysql.createConnection({
 
-        host     : 'localhost',
-        user     : 'root',
-        password : '123456',
+        host     : 'communityportal.ck84odp7lpxq.us-west-2.rds.amazonaws.com',
+        user     : 'communityadmin',
+        password : 'sjsu1234',
         database : 'my_schema',
-        port	 : 3306
+        port     : 3306,
+        multipleStatements : true
     });
+    //database : 'smartcommunity',
     return connection;
 }
 function fetchData(callback,sqlQuery){
@@ -43,4 +45,66 @@ function fetchData(callback,sqlQuery){
     connection.end();
 }
 
+function deleteData(callback,sqlQuery){
+
+    console.log("\nSQL Query::"+sqlQuery);
+    var connection=getConnection();
+    try
+    {
+        connection.query(sqlQuery, function(err, result) {
+            if(err){
+
+                console.log("ERROR: " + err.message);
+            }
+            else
+            {	// return err or result
+
+                callback(err, result);
+
+            }
+        });
+    }
+    catch (ex)
+    {
+        console.log('IN CATCH');
+        callback(ex,1);
+        console.log(ex);
+
+    }
+    console.log("\nConnection closed..");
+    connection.end();
+}
+
+function insertData(callback,sqlQuery){
+
+    console.log("\nSQL Query::"+sqlQuery);
+    var connection=getConnection();
+    try
+    {
+        connection.query(sqlQuery, function(err, result) {
+            if(err){
+
+                console.log("ERROR: " + err.message);
+            }
+            else
+            {	// return err or result
+
+                callback(err, result);
+
+            }
+        });
+    }
+    catch (ex)
+    {
+        console.log('IN CATCH');
+        callback(ex,1);
+        console.log(ex);
+
+    }
+    console.log("\nConnection closed..");
+    connection.end();
+}
+
 exports.fetchData=fetchData;
+exports.deleteData=deleteData;
+exports.insertData=insertData;

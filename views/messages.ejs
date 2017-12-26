@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+    <title>SC</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/profile.css">
+    <link rel="stylesheet" href="/stylesheets/messages.css">
+    <link rel="stylesheet" href="/stylesheets/chat.css">
+    <link rel="stylesheet" href="/stylesheets/header.css">
+
+    <!--<style>
+        body { padding-top:80px; word-wrap:break-word; }
+    </style>-->
+</head>
+<body>
+	<script type="text/javascript">
+		function submit(event) {
+			event.currentTarget.parentNode.submit();
+		}
+	</script>
+<div class="container">
+
+	<div class="col-sm-12 header">
+        <div class="col-sm-6 title">Messages</div>
+        <div class="col-sm-6 nav-buttons">
+
+            <div class="sub-header-container">
+                <a href="/home" class="sub-header">Home</a>
+            </div>
+
+            <div class="sub-header-container">
+                <form action="/viewposts" method="post">
+                    <a href="javascript:;" onclick="parentNode.submit();"  class="sub-header">All Posts</a>
+                    <input type="hidden" name="mess" value="My Post"/>
+                </form>
+            </div>
+
+            <div class="sub-header-container">
+                <a href="/getmessages" class="sub-header">Messages</a>
+            </div>
+
+            <div class="sub-header-container">
+                <a href="/logout" class="sub-header">Logout</a>
+            </div>
+        </div>
+    </div>
+    <!-- <div>
+        <nav class="navbar navbar-inverse" role="navigation" style="">
+            <div class="HomepageTitle">Messages</div>
+            <ul class="nav navbar-nav">
+                <li><a href="/home" class="HomepageHome">Home</a></li>
+                <li>
+                    <form action="/viewposts" method="post">
+                        <a href="javascript:;" class="HomepageMypost" onclick="parentNode.submit();">All Posts</a>
+                        <input type="hidden" name="mess" value="My Post"/>
+                    </form>
+                </li>
+                <li><a href="/logout" class="HomepageLogout">Logout</a></li>
+            </ul>
+        </nav>
+    </div> -->
+
+    <div class="col-sm-12">
+    	<% for(let i = 0; i < result.length; i++) { %>
+	    	<div class="row message-bubble col-sm-12">
+	    		<form action="/userchat/fromUser:<%= result[i].from_user %>/toUser:<%= result[i].to_user %>" 
+	    				method="post">
+	    			<div onclick="submit(event)">
+			            <p class="text-muted"><%= result[i].from_user %></p>
+			            <span class="chatmessage"><%= result[i].message %></span>
+			            <span class="chattime"><%= result[i].created.toLocaleString() %></span>
+		        	</div>
+	            </form>
+	        </div>
+    	<% } %>
+    </div>
+</div>

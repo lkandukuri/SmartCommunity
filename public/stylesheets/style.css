@@ -9,7 +9,7 @@ a {
   color: #00B7FF;
 }
 
-.container .jumbotron {
+.container {
 	background-color: transparent;
 	color: white;
 }
@@ -17,3 +17,4 @@ a {
 .login-page {
 	color: white;
 }
+

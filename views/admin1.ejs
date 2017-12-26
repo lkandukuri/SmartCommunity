@@ -1,0 +1,91 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>SC</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/admin.css">
+</head>
+<body>
+<div class="container">
+
+    <div class="page-header row">
+        <div class="row col-sm-12 text-center">
+            <h1><span class="fa"></span> Admin Page</h1>
+        </div>
+        <div class="row col-sm-6">
+            <!-- LOCAL INFORMATION -->
+            <strong>username</strong>: ADMIN<br>
+        </div>
+
+        <a href="/logout" class="btn btn-default btn-sm logout">Logout</a>
+    </div>
+
+    <div class="row"><%= errorMessage%></div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <form action="/createCommunity" method="post"
+                  class="col-sm-12 add-form">
+                <div class="form-group row">
+                    <label class="col-sm-3">Community name</label>
+                    <input type="text" name="newCommunity" class="col-sm-8"
+                           required placeholder="Enter community name"></input>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-3 col-sm-offset-3 padding-sm-0">
+                        <button type="submit" class="btn btn-warning btn-lg">Create Community</button>
+                    </div>
+                </div>
+            </form>
+
+
+
+            <form action="/updateCommunity" method="post"
+                  class="col-sm-12 add-form">
+                <div class="form-group row">
+                    <label class="col-sm-3">Select community to update</label>
+                    <select name="oldCommunity" class="col-sm-8" required>
+                        <!-- <option value="">Please select a community</option>	 -->
+                        <% for(let i = 0; i < communities.length; i++) { %>
+                        <option value="<%= communities[i]%>"><%= communities[i]%></option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <input type="text" name="newCommunity" class="col-sm-8 col-sm-offset-3"
+                           required placeholder="Enter community name to be updated"></input>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-3 col-sm-offset-3 padding-sm-0">
+                        <button type="submit" class="btn btn-warning btn-lg">Update Community</button>
+                    </div>
+                </div>
+            </form>
+
+
+
+            <form action="/deleteCommunity" method="post"
+                  class="col-sm-12 add-form">
+                <div class="form-group row">
+                    <label class="col-sm-3">Select community</label>
+                    <select name="community" class="col-sm-8" required>
+                        <!-- <option value="">Please select a community</option>	 -->
+                        <% for(let i = 0; i < communities.length; i++) { %>
+                        <option><%= communities[i]%></option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-3 col-sm-offset-3 padding-sm-0">
+                        <button type="submit" class="btn btn-warning btn-lg">Delete Community</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

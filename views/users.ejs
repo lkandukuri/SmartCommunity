@@ -1,0 +1,74 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>SC</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/admin.css">
+    <link rel="stylesheet" href="/stylesheets/profile.css">
+
+</head>
+<body>
+<div class="container">
+
+    <div>
+        <nav class="navbar navbar-inverse" role="navigation" style="">
+            <div class="HomepageTitle">Welcome, Admin</div>
+            <ul class="nav navbar-nav">
+                <li><a href="/adminhome" class="HomepageHome">Home</a></li>
+                <li>
+                    <form action="/viewusers" method="post">
+                        <a href="javascript:;" class="HomepageMypost" onclick="parentNode.submit();">Users</a>
+                        <input type="hidden" name="mess" value="My Post"/>
+                    </form>
+                </li>
+                <li><a href="/logout" class="HomepageLogout">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="page-header row">
+        <div class="row col-sm-6 Community">
+            <span class="AdminCommTitle">User Management</span>
+        </div>
+    </div>
+
+
+
+    <div class="row"><%= errorMessage%></div>
+
+    <div class="row">
+
+        <!-- <hr> -->
+        <div class="col-sm-12 adminUserList">
+            <div class="row">
+                <div class="col-sm-11">
+                    <h3>User Information</h3>
+                </div>
+            </div>
+
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Community</th>
+                    <th>Remove</th>
+                </tr>
+                <% for(let i = 0; i < users.length; i++) { %>
+                <form action="/deleteUser" method="post">
+                    <tr>
+                        <td><input type="text" name="username" class="no-style" value="<%= users[i].username %>" readonly/></td>
+                        <td><%= users[i].email %></td>
+                        <td><%= users[i].community %></td>
+                        <td><button type="submit">Remove User</button></td>
+                    </tr>
+                </form>
+                <% } %>
+            </table>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

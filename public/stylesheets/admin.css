@@ -1,0 +1,82 @@
+
+.container {
+
+}
+
+.logout {
+	float: right;
+}
+
+.padding-sm-0 {
+	padding: 0px;
+}
+
+.form-group {
+	padding-top: 20px;
+	margin: 0px;
+}
+
+.post-form {
+	float: right;
+}
+
+.view-post-btn {
+	padding-top: 30px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.no-style {
+	border:none;
+    background-image:none;
+    background-color:transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.col-sm-6.adminLeftSection {
+    border-right: 1px solid lightgrey;
+    margin-top: -20px;
+}
+
+.adminCreateCommunity {
+    padding: 25px 0 30px 10px;
+    border-bottom: 1px solid lightgray;
+    margin-right: -15px;
+}
+
+.adminUpdateCommunity {
+    padding: 25px 0 30px 10px;
+    border-bottom: 1px solid lightgray;
+    margin-right: -15px;
+}
+
+.adminDeleteCommunity {
+    padding: 25px 0 30px 10px;
+    border-bottom: 1px solid lightgray;
+    margin-right: -15px;
+}
+
+.col-sm-6.adminRightSection {
+    padding: 5px 20px 0 20px;
+}
+
+.col-sm-12.adminUserList {
+    margin-left: 31px;
+    padding-right: 70px !important;
+}
