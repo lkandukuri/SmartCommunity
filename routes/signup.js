@@ -5,8 +5,8 @@ var fs = require('fs');
 var login =  require('./login');
 
 AWS.config.update({
-    accessKeyId: "AKIAIHRIILOILOENQVFA",
-    secretAccessKey: "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",
+    accessKeyId: "xxxxxx",
+    secretAccessKey: "xxxxxxx",
     region:'us-west-2',
     sslEnabled: true,
 });

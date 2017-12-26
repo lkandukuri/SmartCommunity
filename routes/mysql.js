@@ -5,9 +5,9 @@ var mysql = require('mysql');
 function getConnection(){
     var connection = mysql.createConnection({
 
-        host     : 'communityportal.ck84odp7lpxq.us-west-2.rds.amazonaws.com',
-        user     : 'communityadmin',
-        password : 'sjsu1234',
+        host     : 'xxxxxx',
+        user     : 'xxxx',
+        password : 'xxxx',
         database : 'my_schema',
         port     : 3306,
         multipleStatements : true

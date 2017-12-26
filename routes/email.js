@@ -6,8 +6,8 @@ var moment = require('moment');
 
 
 AWS.config.update({
-    accessKeyId: "AKIAIHRIILOILOENQVFA",
-    secretAccessKey: "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",
+    accessKeyId: "xxxxxx",
+    secretAccessKey: "xxxxxx",
     region:'us-west-2',
     sslEnabled: true,
 });
